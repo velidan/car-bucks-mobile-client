@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Image, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useFocusEffect } from '@react-navigation/native';
 
 function LogoTitle(props) {
   return (
@@ -14,9 +15,17 @@ function LogoTitle(props) {
 }
 
 function HomeScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <Text>Home Screen 1.</Text>
+  const [count, setCount] = React.useState(0);
+
+  navigation.setOptions({
+    headerRight: () => (
+      <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+    ),
+  });
+
+  return <View>
+    <Text>Count: {count}</Text>
+    
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Details', {
@@ -24,14 +33,40 @@ function HomeScreen({ navigation }) {
           otherParam: 'anything you want here',
         })}
       />
-    </View>
-  )
+      
+      <Button
+        onPress={() => navigation.navigate('MyModal')}
+        title="Open Modal"
+      />
+      
+    </View>;
 }
 
 function DetailsScreen({ route, navigation }) {
   /* 2. Get the param */
   const { itemId } = route.params;
   const { otherParam } = route.params;
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      console.log("focus")
+      return () => {
+        console.log("unfocus")
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
+
+  // React.useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     console.log("screen focused")
+  //   });
+
+  //   return unsubscribe;
+  // }, [navigation]);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -57,16 +92,38 @@ function DetailsScreen({ route, navigation }) {
   );
 }
 
-const Stack = createStackNavigator();
-
-export default function App() {
+function ModalScreen({ navigation }) {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen 
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+      <Button onPress={() => navigation.goBack()} title="Dismiss" />
+    </View>
+  );
+}
+
+const MainStack = createStackNavigator();
+const RootStack = createStackNavigator();
+
+
+function MainStackScreen() {
+  return (
+    <MainStack.Navigator initialRouteName='Home'>
+      <MainStack.Screen 
           name="Home" 
           component={HomeScreen}
-          options={{ headerTitle: props => <LogoTitle {...props} /> }}
+          options={{ 
+            headerTitle: props => <LogoTitle {...props} />,
+            // ATTENTION. THis in onPress isn't a HomeScreen. It's just a button
+            // To achieve correct this we need to setProps DIRECTLY in the HomeScreen
+            // headerRight: () => (
+            //   <Button
+            //     onPress={() => alert('This is a button!')}
+            //     title="Info"
+            //     color="#fff"
+            //   />
+            //   )
+          
+          }}
           // options={{
           //   title: 'My home',
           //   headerStyle: {
@@ -78,8 +135,32 @@ export default function App() {
           //   },
           // }}
         />
-        <Stack.Screen name="Details" component={DetailsScreen} initialParams={{ itemId: 42 }} />
-      </Stack.Navigator>
+        <MainStack.Screen name="Details" component={DetailsScreen} initialParams={{ itemId: 42 }} />
+    </MainStack.Navigator>
+  );
+}
+
+function RootStackScreen() {
+  return (
+    <RootStack.Navigator mode="modal">
+      <RootStack.Screen
+        name="Main"
+        component={MainStackScreen}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen name="MyModal" component={ModalScreen} />
+    </RootStack.Navigator>
+  );
+}
+
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <RootStack.Navigator mode="modal" headerMode="none">
+        <RootStack.Screen name="Main" component={MainStackScreen} />
+        <RootStack.Screen name="MyModal" component={ModalScreen} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 }
