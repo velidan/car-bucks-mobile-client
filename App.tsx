@@ -4,6 +4,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useFocusEffect } from '@react-navigation/native';
 
+import { AppLoading } from 'expo';
+import { Asset } from 'expo-asset';
+import { Block, GalioProvider } from 'galio-framework';
+
+import { argonTheme } from './constants';
+
+import Login from "./screens/Login";
+
 function LogoTitle(props) {
   return (
     <Text>Logo title</Text>
@@ -33,6 +41,8 @@ function HomeScreen({ navigation }) {
           otherParam: 'anything you want here',
         })}
       />
+
+      <Button title="Go to Login" onPress={() => navigation.navigate('Login')} />
       
       <Button
         onPress={() => navigation.navigate('MyModal')}
@@ -136,6 +146,7 @@ function MainStackScreen() {
           // }}
         />
         <MainStack.Screen name="Details" component={DetailsScreen} initialParams={{ itemId: 42 }} />
+        <MainStack.Screen name="Login" component={Login} />
     </MainStack.Navigator>
   );
 }
@@ -156,12 +167,15 @@ function RootStackScreen() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <RootStack.Navigator mode="modal" headerMode="none">
-        <RootStack.Screen name="Main" component={MainStackScreen} />
-        <RootStack.Screen name="MyModal" component={ModalScreen} />
-      </RootStack.Navigator>
-    </NavigationContainer>
+    <GalioProvider theme={argonTheme}>
+        <NavigationContainer>
+          <RootStack.Navigator mode="modal" headerMode="none">
+            <RootStack.Screen name="Main" component={MainStackScreen} />
+            <RootStack.Screen name="MyModal" component={ModalScreen} />
+          </RootStack.Navigator>
+        </NavigationContainer>
+    </GalioProvider>
+
   );
 }
 
