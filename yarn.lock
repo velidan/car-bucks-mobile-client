@@ -283,7 +283,7 @@
     "@babel/helper-create-class-features-plugin" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
 
-"@babel/plugin-proposal-decorators@7.8.3":
+"@babel/plugin-proposal-decorators@7.8.3", "@babel/plugin-proposal-decorators@^7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.8.3.tgz#2156860ab65c5abf068c3f67042184041066543e"
   dependencies:
@@ -7620,6 +7620,20 @@ mkdirp@0.5.1, mkdirp@^0.5.1, mkdirp@~0.5.1:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+mobx-react-lite@^1.4.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-1.5.2.tgz#c4395b0568b9cb16f07669d8869cc4efa1b8656d"
+
+mobx-react@^6.1.8:
+  version "6.1.8"
+  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-6.1.8.tgz#5b9a3950463d58c154dda2c94d16d48ed8fcb02e"
+  dependencies:
+    mobx-react-lite "^1.4.2"
+
+mobx@^5.15.4:
+  version "5.15.4"
+  resolved "https://registry.yarnpkg.com/mobx/-/mobx-5.15.4.tgz#9da1a84e97ba624622f4e55a0bf3300fb931c2ab"
 
 moo@^0.5.0:
   version "0.5.1"
