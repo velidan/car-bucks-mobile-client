@@ -22,7 +22,7 @@
   },
   "scripts": {
     "android": "react-native run-android",
-	  "android:ts-watch": "concurrently \"yarn check-types:watch\"  \"react-native run-android\"",
+    "android:ts-watch": "concurrently \"yarn check-types:watch\"  \"react-native run-android\"",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
@@ -45,6 +45,8 @@
     "@types/react-native": "^0.61.22",
     "@types/react-test-renderer": "^16.9.2",
     "electron-is-dev": "^1.1.0",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
     "react": "16.9.0",
     "react-dom": "^16.13.0",
     "react-native": "0.61.5",
@@ -54,6 +56,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/runtime": "^7.8.7",
     "@react-native-community/eslint-config": "^0.0.7",
     "concurrently": "^5.1.0",
