@@ -45,6 +45,32 @@ exports[`renders correctly 1`] = `
       Counter 
       0
     </Text>
+    <Text>
+      TEST MOBX PROP
+    </Text>
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View>
+        <Text>
+          CHANGE MOBX PROP 1!
+        </Text>
+      </View>
+    </View>
   </View>
 </View>
 `;
