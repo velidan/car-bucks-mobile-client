@@ -1,11 +1,23 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Platform, Linking } from 'react-native';
 
 import { Provider, inject, observer } from 'mobx-react';
 import store from './stores/store';
 
+const Router  = require('./Router').default;
+
 // Look at public/index.html!
 
+const Link = ({ href, children }: any) => (
+  <Text
+    accessibilityRole="link"
+    onPress={() => {
+      Linking.openURL(href);
+    }}
+  >
+    <Text>{children}</Text>
+  </Text>
+);
 
 const MyButton = (props: { label: string }) => (
   <View>
@@ -42,6 +54,10 @@ class Home extends React.Component<Props> {
           <View>
             
             <Text >Hello World</Text>
+            <Link href="https://github.com/facebook/create-react-app">
+              Create React App
+            </Link>
+            <Router label="Ass" />
 
             <TouchableOpacity testID='button' onPress={() => { this.setState({ counter: counter + 1 }) }}>
               <MyButton label='Press me!'/>
