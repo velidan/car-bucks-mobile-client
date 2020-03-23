@@ -1,10 +1,29 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Platform } from "react-native";
+import {
+  Router as BrowserRouter,
+  Switch,
+  Route
+} from "react-router";
+// import createBrowserHistory from 'history/createBrowserHistory';
+// import { Provider } from 'mobx-react';
+// import { RouterStore, syncHistoryWithStore } from 'react-router';
 
-const Router = (props: { label: string }) => (
-  <View>
-    <Text>Router Web</Text>
-  </View>
+
+import HomeScreen from "./Home";
+import DetailsScreen from "./Details";
+
+const Router = ({ history }: any) => (
+  <BrowserRouter history={history}>
+    <Switch>
+      <Route exact path="/">
+        <HomeScreen />
+      </Route>
+      <Route path="/details">
+        <DetailsScreen />
+      </Route>
+
+    </Switch>
+  </BrowserRouter>
 )
 
 export default Router;

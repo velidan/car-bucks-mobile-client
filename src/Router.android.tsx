@@ -1,10 +1,22 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Platform } from "react-native";
 
-const Router = (props: { label: string }) => (
-  <View>
-    <Text>Router Android</Text>
-  </View>
-)
+import HomeScreen from "./Home";
+import DetailsScreen from "./Details";
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+function Router() {
+  return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+  );
+}
 
 export default Router;
