@@ -2,7 +2,8 @@ import React from "react";
 import {
   Router as BrowserRouter,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router";
 // import createBrowserHistory from 'history/createBrowserHistory';
 // import { Provider } from 'mobx-react';
@@ -14,6 +15,7 @@ import DetailsScreen from "./Details";
 
 const Router = ({ history }: any) => (
   <BrowserRouter history={history}>
+
     <Switch>
       <Route exact path="/">
         <HomeScreen />
@@ -23,6 +25,9 @@ const Router = ({ history }: any) => (
       </Route>
 
     </Switch>
+    <div>
+      {window.location.pathname.includes('index.html') && <Redirect to="/" />}
+    </div>
   </BrowserRouter>
 )
 
