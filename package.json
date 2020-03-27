@@ -25,7 +25,7 @@
   "scripts": {
     "android": "react-native run-android",
     "android:ts-watch": "concurrently \"yarn check-types:watch\"  \"react-native run-android\"",
-    "android:build-debug": "cd ./android && ./gradlew assembleDebug",
+    "android:build-debug": "npx react-native bundle --platform android --dev false --entry-file ./index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res && cd ./android && ./gradlew assembleDebug",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
